@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cc.bootstrap.page.dao.UserMapper">
+	<!-- 查询所有用户 -->
+	<select id="findAllUsers" resultMap="users">
+		select * from t_user
+	</select>
+
+	<!-- 登录时查询单个用户 -->
+	<select id="findUserForLogin" parameterType="user" resultType="user">
+		select * from t_user where user_name = #{user.userName} and pwd =
+		#{user.password}
+	</select>
+
+	<resultMap id="users" type="user">
+		<id property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="pwd" />
+		<result property="mobilePhone" column="mobile_phone" />
+		<result property="address" column="address" />
+		<result property="role" column="role" />
+		<result property="note" column="note" />
+		<result property="email" column="email" />
+	</resultMap>
+</mapper>

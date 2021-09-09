@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cc.bootstrap.page.dao.MailMapper">
+	<!-- 查询所有用户 -->
+	<select id="findAllEmails" resultMap="emails">
+		select * from t_email
+	</select>
+
+	<resultMap id="emails" type="email">
+		<id property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="role" column="role" />
+		<result property="email" column="email" />
+	</resultMap>
+
+	<insert id="insertEmail" parameterType="email">
+		insert into t_email
+		(user_name,email,role)
+		values
+		(#{email.userName},#{email.email},#{email.role})
+	</insert>
+</mapper>

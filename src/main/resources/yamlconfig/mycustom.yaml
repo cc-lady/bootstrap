@@ -1,0 +1,6 @@
+nameSpace: woody
+applicationName: woodyapp
+podLableName: woodyapp
+test:
+  myName: cc
+  myAge: 28
