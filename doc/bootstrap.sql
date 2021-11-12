@@ -12,7 +12,7 @@ create table t_user(
 );
 
  -- t_user用户表增加一条数据
-INSERT INTO `t_user` VALUES (1, 'cc', '123456', '18810424140', 'beijing', 'no.1', 'chenchen_hardwork@163.com', '1');
+INSERT INTO `t_user` VALUES (1, 'cc', '123456', '18810000000', 'beijing', 'no.1', 'chenchen_hardwork@163.com', '1');
 
 
  -- 创建t_email表

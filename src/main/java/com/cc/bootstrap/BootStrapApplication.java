@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContext;
  * @author: CC
  * @date: 2021年4月23日 上午10:11:01
  */
-@MapperScan("com.cc.bootstrap.page.dao")//mybatis-plus扫描mapper
+@MapperScan({"com.cc.bootstrap.page.dao","com.cc.bootstrap.intl.dao"})//mybatis-plus扫描mapper
 @EnableDiscoveryClient//开启服务发现支持
 @EnableFeignClients//开启feign调用支持
 @SpringBootApplication

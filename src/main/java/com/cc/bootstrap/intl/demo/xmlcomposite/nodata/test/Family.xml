@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Family>
+    <familyId>111</familyId><!--表 家庭-->
+    <familyName>cc的家</familyName>
+    <familyMaster>陈千户</familyMaster>
+    <Members>
+        <Member><!--表 人员-->
+            <memberId>1</memberId>
+            <name>qh</name>
+            <relation>户主</relation>
+            <age>55</age>
+            <sex>0</sex>
+            <education>小学</education>
+            <Job><!--表 工作-->
+                <name>工人</name>
+                <company>北京工区</company>
+                <salary>8000</salary>
+            </Job>
+        </Member>
+        <Member>
+            <memberId>2</memberId>
+            <name>yy</name>
+            <relation>妻子</relation>
+            <age>50</age>
+            <sex>1</sex>
+            <education>高中</education>
+            <Job>
+                <name>家政中介人员</name>
+                <company>北京家政</company>
+                <salary>8000</salary>
+            </Job>
+        </Member>
+        <Member>
+            <memberId>3</memberId>
+            <name>cc</name>
+            <relation>女儿</relation>
+            <age>29</age>
+            <sex>1</sex>
+            <education>本科</education>
+            <Job>
+                <name>Java开发工程师</name>
+                <company>北京IT</company>
+                <salary>10000</salary>
+            </Job>
+        </Member>
+        <Member>
+            <memberId>4</memberId>
+            <name>kk</name>
+            <relation>儿子</relation>
+            <age>25</age>
+            <sex>0</sex>
+            <education>大专</education>
+            <Job>
+                <name>兼职工</name>
+                <company>北京便利店</company>
+                <salary>3000</salary>
+            </Job>
+        </Member>
+    </Members>
+    <Address><!--表 住址-->
+        <province>北京</province>
+        <city>北京</city>
+        <district>海淀区</district>
+        <location>上地11号</location>
+    </Address>
+</Family>
