@@ -29,8 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @since    Ver 1.1
  * @Date	 2021年6月24日		下午3:55:51
  *
- * @see 	 
- * @deprecated 
+ * @see
  */
 public class MyCustom {
 	

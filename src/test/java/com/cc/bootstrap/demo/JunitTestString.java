@@ -107,12 +107,13 @@ public class JunitTestString {
      * @updateTime 2021/8/15 0:15
      * @throws
      */
-    @Test
-    public void testWithStrLengthZero2(){
-        RuntimeException exception = Assert.assertThrows(RuntimeException.class,
-                () -> StringTest.subStrOffLast(""));
-        Assert.assertEquals(JunitTestString.TEST_ERROR_MESSAGE, exception.getMessage());
-    }
+//    @Test
+//    public void testWithStrLengthZero2(){
+    //Junit5写法
+//        RuntimeException exception = Assert.assertThrows(RuntimeException.class,
+//                () -> StringTest.subStrOffLast(""));
+//        Assert.assertEquals(JunitTestString.TEST_ERROR_MESSAGE, exception.getMessage());
+//    }
 
     @After
     public void afterMethodMethod() {

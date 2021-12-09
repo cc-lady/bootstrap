@@ -25,8 +25,7 @@ import org.slf4j.LoggerFactory;
  * @since    Ver 1.1
  * @Date	 2021年6月25日		下午2:16:48
  *
- * @see 	 
- * @deprecated 
+ * @see
  */
 public class ExceptionTest {
 	private static Logger LOGGER = LoggerFactory.getLogger(ExceptionTest.class);
