@@ -29,17 +29,11 @@ import com.cc.bootstrap.common.demo.yaml.MyCustomConfiguration;
 import com.cc.bootstrap.page.user.TestUser;
 
 /**
- * ClassName:MyCustomConfigurationTest
- * Function: TODO ADD FUNCTION
- * Reason:	 TODO ADD REASON
+ * @Description 单元测试
+ * @author ChenChen
+ * @date 2021/12/30
  *
- * @author   chenc
- * @version  
- * @since    Ver 1.1
- * @Date	 2021年6月24日		下午4:22:30
- *
- * @see 	 
- * @deprecated 
+ * @return 
  */
 @RunWith(SpringJUnit4ClassRunner.class)//引入spring对JUnit4的支持
 //@SpringApplicationConfiguration(classes = SpringbootDemoApplication.class) springboot1.4后被替换使用以下
