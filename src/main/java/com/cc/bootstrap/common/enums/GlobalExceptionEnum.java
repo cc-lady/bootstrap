@@ -11,25 +11,25 @@ import com.cc.bootstrap.common.base.restful.IBaseEnum;
  */
 public enum GlobalExceptionEnum implements IBaseEnum {
 
-    EXCEPTION_ENUM("EC_0001", "未知异常，请联系项目管理员！")
-
+    EXCEPTION_ENUM("EC_0001", "未知异常，请联系项目管理员！"),
+    RUNTIME_EXCEPTION_ENUM("EC_0002", "运行期间发生异常，请联系项目管理员！"),//测试枚举工具类使用
     ;
 
     private String code;
     private String message;
 
-    private GlobalExceptionEnum(String code, String message) {
+    GlobalExceptionEnum(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
     @Override
     public String getCode() {
-        return null;
+        return this.code;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return this.message;
     }
 }
