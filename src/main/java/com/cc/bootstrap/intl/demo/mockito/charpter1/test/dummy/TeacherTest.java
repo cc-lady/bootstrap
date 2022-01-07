@@ -3,7 +3,7 @@ package com.cc.bootstrap.intl.demo.mockito.charpter1.test.dummy;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Grades;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Marks;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Teacher;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;

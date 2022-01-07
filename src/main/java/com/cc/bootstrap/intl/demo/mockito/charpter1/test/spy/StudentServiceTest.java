@@ -2,11 +2,12 @@ package com.cc.bootstrap.intl.demo.mockito.charpter1.test.spy;
 
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Student;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.spyvo.StudentService;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+
 
 /**
  * @author ChenChen

@@ -2,6 +2,8 @@ package com.cc.bootstrap.common.base.restful;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+
 /**
  * @ClassName: ResponseResult
  * @Description: Restful API响应结果模板类
@@ -26,7 +28,7 @@ public class ResponseResult<T> {
 		this.message = message;
 		this.data = data;
 	}
-	
+
 
 	//成功，仅提示成功
 	public static<T> ResponseResult<T> success(){

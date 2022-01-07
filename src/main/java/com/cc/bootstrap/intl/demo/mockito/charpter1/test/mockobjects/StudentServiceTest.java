@@ -3,9 +3,10 @@ package com.cc.bootstrap.intl.demo.mockito.charpter1.test.mockobjects;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Student;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.mockobjectsvo.StudentService;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.mockobjectsvo.StudentServiceMockObject;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+
 
 /**
  * @author ChenChen

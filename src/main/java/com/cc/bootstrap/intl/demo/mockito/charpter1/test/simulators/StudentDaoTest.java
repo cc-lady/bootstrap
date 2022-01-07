@@ -3,15 +3,15 @@ package com.cc.bootstrap.intl.demo.mockito.charpter1.test.simulators;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.dummyvo.Student;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.simulatorsvo.StudentDaoImpl;
 import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * @author ChenChen

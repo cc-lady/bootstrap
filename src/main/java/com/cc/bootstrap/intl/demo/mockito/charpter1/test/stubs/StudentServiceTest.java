@@ -3,9 +3,10 @@ package com.cc.bootstrap.intl.demo.mockito.charpter1.test.stubs;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.stubsvo.CreateStudentResponse;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.stubsvo.StudentService;
 import com.cc.bootstrap.intl.demo.mockito.charpter1.vo.stubsvo.StudentServiceImpl;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static junit.framework.TestCase.assertFalse;
+
 
 /**
  * @author ChenChen
