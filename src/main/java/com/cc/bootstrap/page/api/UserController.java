@@ -211,6 +211,7 @@ public class UserController {
 		if(null != user.getRole()){
 			queryWrapper.eq("role", user.getRole());
 		}
+		queryWrapper.orderByAsc("user_name");//排序
 
 		//根据条件分页查询user数据
 		List<User> userList = userMapper.selectPage(page, queryWrapper).getRecords();
