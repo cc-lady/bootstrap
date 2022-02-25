@@ -1,11 +1,14 @@
 package com.cc.bootstrap.intl.demo.lambda.study3;
 
-import com.cc.bootstrap.common.demo.test.ExceptionTest;
 import com.cc.bootstrap.intl.demo.lambda.vo.Track;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -124,6 +127,8 @@ public class Note {
         int count = Stream.of(1, 2, 3)
                 .reduce(0, (acc, element) -> acc + element);//acc为累计求和值， element为遍历的每个元素
         LOGGER.info("reduce method, count = {}", count);
+
+
 
 
 
