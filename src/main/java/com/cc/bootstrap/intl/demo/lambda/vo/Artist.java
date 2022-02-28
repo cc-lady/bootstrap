@@ -2,6 +2,8 @@ package com.cc.bootstrap.intl.demo.lambda.vo;
 
 import com.cc.bootstrap.common.base.entity.Schema;
 
+import java.util.Arrays;
+
 /**
  * @author ChenChen
  * @version 1.0.0
@@ -54,6 +56,14 @@ public class Artist implements Schema {
         this.origin = origin;
     }
 
+    public long memberCount() {
+        if(null == this.members) {
+            return 0;
+        }
+
+        return Arrays.stream(this.members.split(",")).count();
+    }
+
     @Override
     public String toString() {
         return "Artist{" +
@@ -61,5 +71,17 @@ public class Artist implements Schema {
                 ", members='" + members + '\'' +
                 ", origin='" + origin + '\'' +
                 '}';
+    }
+
+    /**
+     * 是否是独唱歌手
+     * @return boolean
+     */
+    public boolean isSolo() {
+        if(null == this.members) {
+            return false;
+        }
+
+        return this.members.split(",").length == 1;
     }
 }

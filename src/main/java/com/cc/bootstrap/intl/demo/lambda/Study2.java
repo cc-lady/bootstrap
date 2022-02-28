@@ -1,15 +1,10 @@
-package com.cc.bootstrap.intl.demo.lambda.study2;
+package com.cc.bootstrap.intl.demo.lambda;
 
 import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.function.Supplier;
 
 /**
  * @author ChenChen
@@ -18,7 +13,7 @@ import java.util.function.Supplier;
  * @Description 第二章练习题
  * @createTime 2021年12月08日 20:34:00
  */
-public class Exercise {
+public class Study2 {
 
     public static void main(String[] args) {
         /**

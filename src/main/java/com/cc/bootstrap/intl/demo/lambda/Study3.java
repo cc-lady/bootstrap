@@ -1,4 +1,4 @@
-package com.cc.bootstrap.intl.demo.lambda.study3;
+package com.cc.bootstrap.intl.demo.lambda;
 
 import com.cc.bootstrap.intl.demo.lambda.vo.Track;
 import org.slf4j.Logger;
@@ -21,8 +21,8 @@ import java.util.stream.Stream;
  * 该 API 的 Javadoc 中还有更多信息。
  * @createTime 2021年12月08日 21:42:00
  */
-public class Note {
-    private static Logger LOGGER = LoggerFactory.getLogger(Note.class);
+public class Study3 {
+    private static Logger LOGGER = LoggerFactory.getLogger(Study3.class);
 
     public static void main(String[] args) {
         /**

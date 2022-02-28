@@ -1,4 +1,4 @@
-package com.cc.bootstrap.intl.demo.lambda.study4;
+package com.cc.bootstrap.intl.demo.lambda;
 
 import com.cc.bootstrap.common.schema.User;
 import org.slf4j.Logger;
@@ -17,8 +17,8 @@ import java.util.function.Supplier;
  * @Description 第四章学习笔记 —— 类库
  * @createTime 2021年12月08日 21:42:00
  */
-public class Note {
-    private static Logger LOGGER = LoggerFactory.getLogger(Note.class);
+public class Study4 {
+    private static Logger LOGGER = LoggerFactory.getLogger(Study4.class);
 
     // 启用 Lambda 表达式实现的日志记录器
     public static void debug(Supplier<String> message) {
@@ -81,7 +81,7 @@ public class Note {
          * Ŗ 如果有多个可能的目标类型，由最具体的类型推导得出；
          * Ŗ 如果有多个可能的目标类型且最具体的类型不明确，则需人为指定类型
          */
-        Note note = new Note();
+        Study4 note = new Study4();
         note.overloadedMethod((x, y) -> x + y);
         // IntegerBinaryOperator
 

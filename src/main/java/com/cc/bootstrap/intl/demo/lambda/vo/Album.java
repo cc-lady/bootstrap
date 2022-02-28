@@ -20,7 +20,7 @@ public class Album implements Schema {
     // 专辑上所有曲目的列表
     private List<Track> tracks;
 
-    // 参与创作本专辑的艺术家列表
+    // 参与创作本专辑的艺术家列表 - 第一个为主唱
     private List<Artist> musicians;
 
     public Album() {
