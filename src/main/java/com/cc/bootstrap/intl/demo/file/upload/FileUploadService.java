@@ -1,8 +1,8 @@
 package com.cc.bootstrap.intl.demo.file.upload;
 
 import com.cc.bootstrap.common.exception.FileException;
-import com.cc.bootstrap.common.schema.FileInfoEntity;
 import com.cc.bootstrap.common.util.FileUtils;
+import com.cc.bootstrap.intl.logic.FileInfoLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -53,8 +51,6 @@ public class FileUploadService {
             throw new UnsupportedOperationException("为上传文件创建目录失败！");
         }
 
-        List<FileInfoEntity> fileInfoEntityList = new ArrayList<>();
-
         String fileId = null;
         String fileName = null;
         String fileSize = null;
@@ -70,13 +66,13 @@ public class FileUploadService {
                 fileSize = String.format("%.2f", fSize/1024) + "MB";
             }
 
-            // 上传D:\git\github-repo\bootstrap-github\uploadFile\cc\f9086ca2-8f99-4466-b91f-43ad1500536d
+            // 上传D:\\git\\github-repo\\bootstrap-github\\uploadFile\\cc\\f9086ca2-8f99-4466-b91f-43ad1500536d
             // 即不能直接将文件名放在上传路径中，以免文件名../../类似，发生文件路径泄漏安全问题。
             filePath = dirPath + File.separator + fileId;
 
             // 插入上传文件信息
             try {
-                fileInfoLogic.insertUploadFileInfo(fileId, fileName, fileSize, uploadTime);
+                fileInfoLogic.insertUploadFileInfo(fileId, userId, fileName, fileSize, uploadTime);
             } catch (Exception e) {
                 LOGGER.error("文件【{}】上传-插入上传文件信息失败！", fileName, e);
                 continue;

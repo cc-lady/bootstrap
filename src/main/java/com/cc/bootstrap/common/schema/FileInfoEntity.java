@@ -35,4 +35,8 @@ public class FileInfoEntity implements Schema {
     //文件上传实践
     @TableField(value = "upload_time")
     private Date uploadTime;
+
+    // 例如：cc
+    @TableField(value = "user_id")
+    private String userId;
 }
