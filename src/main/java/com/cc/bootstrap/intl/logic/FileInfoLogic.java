@@ -101,7 +101,11 @@ public class FileInfoLogic {
         ZipOutputStream zipOutputStream = new ZipOutputStream(response.getOutputStream());
         FileSystemResource resource = null;
         for (FileVo fileVo : fileVoList) {
+            // 下载的文件不在jar包内部
             resource = new FileSystemResource(fileVo.getFilePath());
+            // 若下载的文件在jar包内部，需要改变写法，否则下载错误
+//            ResourceLoader resourceLoader = new DefaultResourceLoader();
+//            Resource resource = resourceLoader.getResource(fileVo.getFilePath());
             if(!resource.exists()) {
                 LOGGER.error("文件【{}】不存在！", fileVo.getFileName());
                 continue;
