@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,8 @@ public class FileUploadServiceTest {
          * 要么自己为字段赋值，例如运用反射为字段赋值。
          */
         ReflectUtils.setField(fileUploadService, "fileUploadPath", "upload");
+        // 这个类也不用自己写，spring-test 依赖中包含此类
+        ReflectionTestUtils.setField(fileUploadService, "fileUploadPath", "upload");
     }
 
 
