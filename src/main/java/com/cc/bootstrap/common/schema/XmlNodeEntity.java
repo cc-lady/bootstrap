@@ -2,7 +2,7 @@ package com.cc.bootstrap.common.schema;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cc.bootstrap.common.base.entity.Schema;
+import com.cc.bootstrap.common.base.entity.AbstractEntity;
 import lombok.Data;
 
 /**
@@ -14,8 +14,7 @@ import lombok.Data;
  */
 @Data
 @TableName(value = "t_xml_node")
-public class XmlNodeEntity implements Schema {
-    private static final long serialVersionUID = 1L;
+public class XmlNodeEntity extends AbstractEntity {
 
     @TableField(value = "id")
     private String id;//Id唯一标识

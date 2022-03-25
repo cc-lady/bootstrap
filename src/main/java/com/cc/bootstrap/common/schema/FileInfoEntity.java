@@ -3,7 +3,7 @@ package com.cc.bootstrap.common.schema;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cc.bootstrap.common.base.entity.Schema;
+import com.cc.bootstrap.common.base.entity.AbstractEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,8 +17,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @TableName(value = "t_file_info")
-public class FileInfoEntity implements Schema {
-    private static final long serialVersionUID = 1L;
+public class FileInfoEntity extends AbstractEntity {
 
     //文件编号
     @TableId(value = "id")

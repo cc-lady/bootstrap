@@ -3,7 +3,7 @@ package com.cc.bootstrap.common.schema;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cc.bootstrap.common.base.entity.Schema;
+import com.cc.bootstrap.common.base.entity.AbstractEntity;
 
 /**
  * @ClassName: Email 
@@ -13,9 +13,7 @@ import com.cc.bootstrap.common.base.entity.Schema;
  * @version V1.0 
  */
 @TableName(value = "t_email", resultMap = "emails")//mybatis-plus 注解
-public class Email implements Schema {
-
-	private static final long serialVersionUID = 1L;
+public class Email extends AbstractEntity {
 	
 	//编号
 	@TableId(value = "id")

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cc.bootstrap.common.base.entity.Schema;
+import com.cc.bootstrap.common.base.entity.AbstractEntity;
 import lombok.Data;
 
 /**
@@ -15,7 +15,7 @@ import lombok.Data;
  */
 @Data
 @TableName(value = "t_user", resultMap = "users")//mybatis-plus 注解
-public class User implements Schema {
+public class User extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 	
