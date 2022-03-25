@@ -1,5 +1,6 @@
 package com.cc.bootstrap.intl.demo.file.upload;
 
+import com.cc.bootstrap.common.base.restful.ResponseResult;
 import com.cc.bootstrap.common.exception.FileException;
 import com.cc.bootstrap.common.util.FileUtils;
 import com.cc.bootstrap.intl.logic.FileInfoLogic;
@@ -43,7 +44,7 @@ public class FileUploadService {
      * @date 2022/3/2 17:12
      */
     @Transactional
-    public void uploadFiles(String userId, MultipartFile[] files) {
+    public ResponseResult uploadFiles(String userId, MultipartFile[] files) {
 
         // 目录创建失败，不上传
         String dirPath = fileUploadPath + File.separator + userId;
@@ -86,5 +87,7 @@ public class FileUploadService {
                 throw new FileException("上传文件【"+fileName+"】发生异常，请检查！");
             }
         }
+
+        return ResponseResult.success();
     }
 }
