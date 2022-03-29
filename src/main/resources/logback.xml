@@ -54,11 +54,22 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} -%msg%n</pattern>
         </encoder>
     </appender>
+    <!-- 该appender的功能是将记录信息以特定格式写到文件 -->
+    <appender name="ERROR" class="ch.qos.logback.core.FileAppender">
+        <!-- $使用变量FILE_PATH的格式,类似Linux中使用的格式：${FILE_PATH} -->
+        <file>${FILE_PATH}/error.log</file>
+        <encoder>
+            <!-- 指定输出格式 -->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} -%msg%n</pattern>
+        </encoder>
+    </appender>
     
     <!-- level属性：指定根logger的分配级别 -->
     <root level="info">
         <!-- ref属性：指定根logger关联的appender -->
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR"/>
     </root>
     <!-- name:指定logger名称；level：指定logger的分配级别；additivity(非必须，默认为true)：设置appender叠加性 -->
     <logger name="demo" level="debug" additivity="false">
