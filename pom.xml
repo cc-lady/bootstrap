@@ -21,6 +21,7 @@
 		<java.version>1.8</java.version>
 		<!-- 如果创建了一个额外的SpringBootWebApplication类，确保高速Spring Boot要从那个主类开始启动程序 我们这个项目只有一个，所以暂时不需要 -->
 		<!-- <start-class>com.cc.springbootDemo</start-class> -->
+		<powermock.version>2.0.2</powermock.version><!--powermock-->
 	</properties>
 
 	<dependencies>
@@ -237,6 +238,19 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!--<dependency>
             <groupId>com.sun</groupId>
