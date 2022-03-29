@@ -30,6 +30,12 @@ import static org.powermock.reflect.Whitebox.setInternalState;
 public class FileUploadServiceTest2 {
     private static Logger LOGGER = LoggerFactory.getLogger(FileUploadServiceTest2.class);
 
+    // 这两个注解依然可以用
+//    @InjectMocks
+//    private FileUploadService fileUploadService;
+//    @Mock
+//    private FileInfoLogic fileInfoLogic;
+
 
     @Test
     public void test_uploadFiles_success() throws IOException {
