@@ -12,13 +12,13 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.powermock.reflect.Whitebox.setInternalState;
 
 /**
  * @Description: 使用powermock进行单元测试
@@ -43,8 +43,11 @@ public class FileUploadServiceTest2 {
         PowerMockito.doNothing().when(fileInfoLogic).insertUploadFileInfo(any(), any(), any(), any(), any());
         // test
         FileUploadService fileUploadService = new FileUploadService();
-        ReflectionTestUtils.setField(fileUploadService, "fileUploadPath", "upload");
-        ReflectionTestUtils.setField(fileUploadService, "fileInfoLogic", fileInfoLogic);
+        // 使用powermock的设置方式，原理类似（反射设置字段值）
+        setInternalState(fileUploadService, "fileUploadPath", "upload");
+        setInternalState(fileUploadService, "fileInfoLogic", fileInfoLogic);
+//        ReflectionTestUtils.setField(fileUploadService, "fileUploadPath", "upload");
+//        ReflectionTestUtils.setField(fileUploadService, "fileInfoLogic", fileInfoLogic);
         ResponseResult responseResult = fileUploadService.uploadFiles(userId, files);
         // verify
         TestCase.assertTrue(responseResult.getSuccess());
