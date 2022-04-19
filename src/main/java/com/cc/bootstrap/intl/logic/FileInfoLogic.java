@@ -106,6 +106,8 @@ public class FileInfoLogic {
             // 若下载的文件在jar包内部，需要改变写法，否则下载错误
 //            ResourceLoader resourceLoader = new DefaultResourceLoader();
 //            Resource resource = resourceLoader.getResource(fileVo.getFilePath());
+            // 或
+//            Resource resource = new ClassPathResource(fileVo.getFilePath()); // 在resources下
             if(!resource.exists()) {
                 LOGGER.error("文件【{}】不存在！", fileVo.getFileName());
                 continue;

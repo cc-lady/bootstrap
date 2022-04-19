@@ -252,6 +252,13 @@
 			<version>${powermock.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!--poi-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.2</version>
+		</dependency>
 		<!--<dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
@@ -259,6 +266,27 @@
             <scope>system</scope>
             <systemPath>D:/Program Files/Java/jdk1.8.0_91/lib/tools.jar</systemPath>
         </dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>io.fabric8</groupId>-->
+<!--			<artifactId>knative-client</artifactId>-->
+<!--			<version>4.4.0</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>io.fabric8</groupId>-->
+<!--			<artifactId>knative-model</artifactId>-->
+<!--			<version>4.4.0</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>io.fabric8</groupId>-->
+<!--			<artifactId>kubernetes-api</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>io.fabric8</groupId>-->
+<!--			<artifactId>knative-extension-pom</artifactId>-->
+<!--			<version>4.4.0</version>-->
+<!--			<type>pom</type>-->
+<!--		</dependency>-->
 	</dependencies>
 
     <!-- spring cloud依赖 -->

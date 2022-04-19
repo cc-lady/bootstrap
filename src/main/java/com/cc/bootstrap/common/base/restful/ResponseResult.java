@@ -2,8 +2,6 @@ package com.cc.bootstrap.common.base.restful;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.List;
-
 /**
  * @ClassName: ResponseResult
  * @Description: Restful API响应结果模板类
@@ -43,6 +41,11 @@ public class ResponseResult<T> {
 	//成功，带返回数据
 	public static<T> ResponseResult<T> success(IBaseEnum code, T data){
 		return new ResponseResult<T>(true, code.getCode(), code.getMessage(), data);
+	}
+
+	//成功，仅带返回数据
+	public static<T> ResponseResult<T> success(T data){
+		return new ResponseResult<T>(true, null, null, data);
 	}
 	
 	//失败，不带返回数据

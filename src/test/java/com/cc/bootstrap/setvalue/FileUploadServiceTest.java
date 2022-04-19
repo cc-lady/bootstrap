@@ -60,7 +60,7 @@ public class FileUploadServiceTest {
     public void test_uploadFiles_success() throws IOException {
         // data
         String userId = "testUserId";
-        MultipartFile[] files = new MultipartFile[1];
+        MultipartFile[] files = new MultipartFile[1];// 测试文件
         files[0] = new MockMultipartFile("files", "测试文件上传-用户信息.xls",
                 MediaType.MULTIPART_FORM_DATA, this.getClass().getResourceAsStream("/测试文件上传-用户信息.xls"));
         // stubs

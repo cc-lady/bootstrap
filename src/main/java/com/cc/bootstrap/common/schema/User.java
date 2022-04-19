@@ -32,16 +32,12 @@ public class User extends AbstractEntity {
 	@TableField(value = "mobile_phone")
 	private String mobilePhone;
 	//地址
-
 	private String address;
 	//角色
-
 	private Integer role;
 	//备注
-
 	private String note;
 	//email
-
 	private String email;
 
 	public User(){}

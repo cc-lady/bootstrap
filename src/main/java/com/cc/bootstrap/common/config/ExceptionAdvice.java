@@ -2,7 +2,6 @@ package com.cc.bootstrap.common.config;
 
 import com.cc.bootstrap.common.base.restful.ResponseResult;
 import com.cc.bootstrap.common.enums.GlobalExceptionEnum;
-import com.cc.bootstrap.page.api.UserController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,6 +33,6 @@ public class ExceptionAdvice {
     ResponseResult<String> bindExceptionHandler(Exception exception) {
         String errorMessage = exception.getMessage();
         LOGGER.error("发生Exception.class异常，errorMessage = {} ", errorMessage, exception);
-        return ResponseResult.fail(GlobalExceptionEnum.EXCEPTION_ENUM);
+        return ResponseResult.fail(GlobalExceptionEnum.EXCEPTION_ENUM, errorMessage);
     }
 }
