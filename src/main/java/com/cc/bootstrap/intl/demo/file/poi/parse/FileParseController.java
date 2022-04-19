@@ -1,4 +1,4 @@
-package com.cc.bootstrap.intl.demo.file.poi;
+package com.cc.bootstrap.intl.demo.file.poi.parse;
 
 import com.cc.bootstrap.common.base.restful.ResponseResult;
 import com.cc.bootstrap.common.exception.FileException;

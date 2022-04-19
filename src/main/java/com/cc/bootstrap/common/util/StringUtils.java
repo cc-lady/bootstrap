@@ -15,6 +15,21 @@ public class StringUtils {
     private static Logger LOGGER = LoggerFactory.getLogger(StringUtils.class);
 
     /**
+     * @Description 第一个字母转大写
+     * @param filedName
+     * @author ChenChen
+     * @return java.lang.String
+     * @date 2022/4/19 10:35
+     */
+    public static String upperFirstChar(String filedName) {
+        char[] cs = filedName.toCharArray();
+        if(Character.isLowerCase(cs[0])) {
+            return Character.toUpperCase(cs[0]) + filedName.substring(1);
+        }
+        return filedName;
+    }
+
+    /**
      * @Description 按字节长度截取字符串
      * 字符串的.length方法只会获取字符长度，例如汉字的“我们”和英文的“ab”长度（.length）都是2，但是有时候我们插入数据库需要根据
      * 字节长度截取不超过多少的值插入数据库，并且不能有乱码，例如“我们”在utf-8中算6个字节，那么仅截取字节长度4的时候，应该只截取值为“我”。

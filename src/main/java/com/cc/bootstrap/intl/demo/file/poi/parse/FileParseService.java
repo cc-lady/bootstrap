@@ -1,6 +1,7 @@
-package com.cc.bootstrap.intl.demo.file.poi;
+package com.cc.bootstrap.intl.demo.file.poi.parse;
 
 import com.cc.bootstrap.common.schema.User;
+import com.cc.bootstrap.common.util.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -78,9 +79,11 @@ public class FileParseService {
                             Object value = HSSFReadWrite.getCellValue(cell, FIELD_TYPES[c]);
                             LOGGER.info("set User [{}] = [{}]", HEAD_FIELDS[c], value);
                             try {
-                                method = User.class.getMethod("set" + this.upperFirstChar(HEAD_FIELDS[c]), FIELD_TYPES[c]);
+                                method = User.class.getMethod("set" +
+                                        StringUtils.upperFirstChar(HEAD_FIELDS[c]), FIELD_TYPES[c]);
                             } catch (Exception e) {
-                                LOGGER.error("get User Method set[{}] error!", this.upperFirstChar(HEAD_FIELDS[c]), e);
+                                LOGGER.error("get User Method set[{}] error!",
+                                        StringUtils.upperFirstChar(HEAD_FIELDS[c]), e);
                                 continue;
                             }
                             try {
@@ -98,20 +101,5 @@ public class FileParseService {
 
 
         return userList;
-    }
-
-    /**
-     * @Description 第一个字母转大写
-     * @param filedName
-     * @author ChenChen
-     * @return java.lang.String
-     * @date 2022/4/19 10:35
-     */
-    private String upperFirstChar(String filedName) {
-        char[] cs = filedName.toCharArray();
-        if(Character.isLowerCase(cs[0])) {
-            return Character.toUpperCase(cs[0]) + filedName.substring(1);
-        }
-        return filedName;
     }
 }
