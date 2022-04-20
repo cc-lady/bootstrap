@@ -21,7 +21,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cc.bootstrap.common.base.restful.ResponseResult;
 import com.cc.bootstrap.common.schema.User;
 import com.cc.bootstrap.common.util.ObjectFactory;
-import com.cc.bootstrap.page.UserEnum;
+import com.cc.bootstrap.page.enums.UserEnum;
 import com.cc.bootstrap.page.dao.UserMapper;
 import com.cc.bootstrap.page.service.UserService;
 /**

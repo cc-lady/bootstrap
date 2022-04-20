@@ -14,7 +14,7 @@ import lombok.Data;
  * @date: 2021年4月25日 上午9:43:56
  */
 @Data
-@TableName(value = "t_user", resultMap = "users")//mybatis-plus 注解
+@TableName(value = "t_user")//mybatis-plus 注解
 public class User extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;

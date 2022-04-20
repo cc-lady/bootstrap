@@ -1,11 +1,11 @@
 package com.cc.bootstrap.page.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cc.bootstrap.common.schema.User;
 import com.cc.bootstrap.page.dao.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -30,5 +30,10 @@ public class UserService extends ServiceImpl<UserMapper, User>{
 	public int saveUser2(User user){
 		return userMapper.insert(user);
 	}
-	
+
+	// 切换数据源在同一个事务中不生效，设置成不在同一个事务中
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void insert(int i, User user) {
+		userMapper.insert(user);
+	}
 }

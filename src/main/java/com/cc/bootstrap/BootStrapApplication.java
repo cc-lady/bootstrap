@@ -1,13 +1,14 @@
 package com.cc.bootstrap;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @ClassName: BootStrapApplication
@@ -15,10 +16,10 @@ import org.springframework.context.ApplicationContext;
  * @author: CC
  * @date: 2021年4月23日 上午10:11:01
  */
-@MapperScan({"com.cc.bootstrap.page.dao","com.cc.bootstrap.intl.dao"})//mybatis-plus扫描mapper
+@EnableAsync
 @EnableDiscoveryClient//开启服务发现支持
 @EnableFeignClients//开启feign调用支持
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})//移除默认数据库配置类
 public class BootStrapApplication extends SpringBootServletInitializer{
 
 	//方便未受spring管理的普通类获取上下文中的Service

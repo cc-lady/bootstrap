@@ -12,7 +12,7 @@ import com.cc.bootstrap.common.base.entity.AbstractEntity;
  * @date 2018年11月30日 下午3:05:22 
  * @version V1.0 
  */
-@TableName(value = "t_email", resultMap = "emails")//mybatis-plus 注解
+@TableName(value = "t_email")//mybatis-plus 注解
 public class Email extends AbstractEntity {
 	
 	//编号

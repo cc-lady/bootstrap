@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.6.RELEASE</version>
+		<version>2.3.2.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -25,7 +25,13 @@
 	</properties>
 
 	<dependencies>
-	
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.10</version>
+		</dependency>
+
 	    <!-- spring cloud依赖 -->
 	    <!-- 1.健康检查 -->
 	    <dependency>
@@ -160,10 +166,10 @@
             <artifactId>mybatis</artifactId>
             <version>3.5.2</version>
         </dependency> -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.0.0</version>
+			<version>2.1.2</version>
 			<exclusions>
                 <exclusion>
                     <artifactId>org.mybatis</artifactId>
@@ -174,22 +180,22 @@
                     <groupId>mybatis-spring</groupId>
                 </exclusion>
             </exclusions>
-		</dependency>
+		</dependency>-->
 		<!-- mybatis plus -->
 		<dependency>
 	        <groupId>com.baomidou</groupId>
 	        <artifactId>mybatis-plus-boot-starter</artifactId>
-	        <version>3.0.1</version>
+	        <version>3.1.2</version>
 	    </dependency>
 	    <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.2</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.0.1</version>
+            <version>3.1.2</version>
         </dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -295,7 +301,7 @@
 	        <dependency>
 	            <groupId>org.springframework.cloud</groupId>
 	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>Finchley.RELEASE</version>
+	            <version>Hoxton.SR1</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
@@ -309,7 +315,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.0.6.RELEASE</version>
+				<version>2.4.7</version>
 			</plugin>
 			<!-- jacoco插件：可生成单元测试覆盖率报告 -->
 			<plugin>

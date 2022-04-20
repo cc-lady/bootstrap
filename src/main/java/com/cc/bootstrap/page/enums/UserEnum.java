@@ -1,4 +1,4 @@
-package com.cc.bootstrap.page;
+package com.cc.bootstrap.page.enums;
 
 import com.cc.bootstrap.common.base.restful.IBaseEnum;
 
