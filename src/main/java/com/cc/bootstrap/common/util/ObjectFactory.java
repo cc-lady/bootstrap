@@ -1,12 +1,11 @@
 package com.cc.bootstrap.common.util;
 
+import com.cc.bootstrap.common.base.entity.Schema;
+import org.springframework.beans.BeanUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.beans.BeanUtils;
-
-import com.cc.bootstrap.common.base.entity.Schema;
 
 /**
  * ObjectFactory
@@ -22,7 +21,8 @@ public class ObjectFactory {
      * @return
      */
     @SuppressWarnings("unchecked")
-	public static <T> List<T> toVOList(List<? extends Schema> schemaList, Class<T> voClass) throws InstantiationException, IllegalAccessException {
+	public static <T> List<T> toVOList(List<? extends Schema> schemaList, Class<T> voClass)
+            throws InstantiationException, IllegalAccessException {
         List<T> returnList = new ArrayList<>();
         if (null != schemaList){
             Iterator<Schema> iterator = (Iterator<Schema>)schemaList.iterator();

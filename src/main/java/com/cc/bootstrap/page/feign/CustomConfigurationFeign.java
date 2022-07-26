@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author ChenChen
  * @version 1.0.0
  * @ClassName
- * @Description TODO
+ * @Description 测试查看自定义configmap配置
  * @createTime 2021年08月16日 09:15:00
  */
 @FeignClient(name = "CUSTOMCONFIGURATION", url = "${feign.client.customconfiguration}")

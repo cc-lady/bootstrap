@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.maxBy;
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -232,4 +233,13 @@ public class Study5 {
         return albums.collect(groupingBy(album -> album.getMusicians().get(0), counting()));
     }
 
+    // 根据名字分组，分组数据多个
+    public Map<String, List<Album>> groupByName(Stream<Album> albums) {
+        return albums.collect(groupingBy(Album::getName));
+    }
+
+    // 将转成Map，数据只有一个
+    public Map<String, Album> convertToMap(Stream<Album> albums) {
+        return albums.collect(toMap(Album::getName, album -> album));
+    }
 }
