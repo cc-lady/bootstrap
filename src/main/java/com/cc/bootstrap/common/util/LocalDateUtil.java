@@ -1,7 +1,10 @@
 package com.cc.bootstrap.common.util;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTimeZone;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -10,6 +13,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @ClassName: LocalDateUtil 
@@ -209,15 +213,105 @@ public class LocalDateUtil {
 	 * @return java.lang.String
 	 * @date 2022/7/26 15:06
 	 */
+	//（本地比世界UTC时间多8小时）
 	public static String convertUTCToGenerateStr(String timeStr) {
 		DateTimeFormatter df_UTC = DateTimeFormatter.ofPattern(FormatterPattern_YYYYMMDD_hhmmss_UTC);
 		DateTimeFormatter df = DateTimeFormatter.ofPattern(FormatterPattern_YYYYMMDD_hhmmss);
 
 		if(StringUtils.isNotEmpty(timeStr) && StringUtils.contains(timeStr, 'T')) {
 			LocalDateTime localDateTime = LocalDateTime.parse(timeStr, df_UTC);
-			return df.format(localDateTime);
+			// 增加8小时返回
+			return df.format(localDateTime.plusHours(8));
 		}
 
 		return timeStr;
+	}
+
+	/**
+	 * @Description 将UTC时间字符串转为普通时间字符串，例如：2022-07-08T08:47:37Z转为2022-07-08 08:47:37 第二钟写法
+	 * @param timeUtc
+	 * @author ChenChen
+	 * @return java.lang.String
+	 * @date 2022/8/4 14:51
+	 */
+	public static String convertUTCToGenerateStr2(String timeUtc) {
+		DateTimeFormatter df = DateTimeFormatter.ofPattern(FormatterPattern_YYYYMMDD_hhmmss);
+
+		// 1.instant.atZone(zoneId)
+//		String timeUtc = "2022-08-04T10:14:24Z";
+		Instant instant = Instant.parse(timeUtc);
+
+		ZonedDateTime zonedDateTimeUtc = instant.atZone(ZoneId.of("UTC"));
+		String timeUtc_format = zonedDateTimeUtc.format(df);
+		System.out.println(timeUtc_format);//2022-08-04 10:14:24
+
+		ZoneId zoneId = ZoneId.of("Asia/Shanghai");
+		ZonedDateTime zonedDateTime = instant.atZone(zoneId);
+		System.out.println(zonedDateTime.format(df));//2022-08-04 18:14:24
+
+		ZoneId zoneId_nine = ZoneId.of("Asia/Tokyo");
+		ZonedDateTime zonedDateTime_nine = instant.atZone(zoneId_nine);
+		System.out.println(zonedDateTime_nine.format(df));//2022-08-04 19:14:24
+
+		return zonedDateTime.format(df);//2022-08-04 18:14:24
+	}
+
+	/**
+	 * @Description 将UTC时间字符串转为普通时间字符串，例如：2022-07-08T08:47:37Z转为2022-07-08 08:47:37 第三钟写法
+	 * @param timeUtc
+	 * @author ChenChen
+	 * @return java.lang.String
+	 * @date 2022/8/4 14:57
+	 */
+	public static String convertUTCToGenerateStr3(String timeUtc) throws ParseException {
+		// 2.DateTimeZone.convertUTCToLocal
+		timeUtc = timeUtc.replace("T", " ");
+		timeUtc = timeUtc.replace("Z", "");
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FormatterPattern_YYYYMMDD_hhmmss);
+		Date date = simpleDateFormat.parse(timeUtc);
+		DateTimeZone gmt = DateTimeZone.forTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+		long millis = gmt.convertUTCToLocal(date.getTime());
+		Date dateLocale = new Date(millis);
+		System.out.println(dateLocale.toString());//Thu Aug 04 18:14:24 CST 2022
+
+		long millis2= gmt.convertLocalToUTC(dateLocale.getTime(), true);
+		Date dateLocale2 = new Date(millis2);
+		System.out.println(dateLocale2.toString());//Thu Aug 04 10:14:24 CST 2022
+
+		return simpleDateFormat.format(dateLocale);
+	}
+
+	public static String convertLocalToUtcTimeStr(String timeStr) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime dt = LocalDateTime.parse(timeStr, dateTimeFormatter);
+
+		ZoneId zone = ZoneId.of("Asia/Shanghai");
+		ZonedDateTime zdt = dt.atZone(zone);
+
+		Instant instant = zdt.toInstant();
+		System.out.println("instant = " + instant.toString());
+
+		return instant.toString();
+	}
+
+	public static void main(String[] args) throws ParseException {
+
+		String timeUtc = "2022-08-04T10:14:24Z";
+		String result1 = convertUTCToGenerateStr(timeUtc);
+		String result2 = convertUTCToGenerateStr2(timeUtc);
+		String result3 = convertUTCToGenerateStr3(timeUtc);
+
+		System.out.println("result1 == " + result1);
+		System.out.println("result2 == " + result2);
+		System.out.println("result3 == " + result3);
+//		result1 == 2022-08-04 18:14:24
+//		result2 == 2022-08-04 18:14:24
+//		result3 == 2022-08-04 18:14:24
+
+		String localTimeStr = result1;
+		String utcTimeStr = convertLocalToUtcTimeStr(localTimeStr);
+		System.out.println("localTimeStr = " + localTimeStr + " convertLocalToUtcTimeStr then result = " + utcTimeStr);
+//		localTimeStr = 2022-08-04 18:14:24 convertLocalToUtcTimeStr then result = 2022-08-04T10:14:24Z
 	}
 }
