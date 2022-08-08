@@ -132,6 +132,10 @@ public class Study5 {
         Map<Boolean, List<Artist>> partitionArtistMap = study5.bandsAndSoloRef(artists_partition.stream());
         LOGGER.info("partitionArtistMap [{}]", partitionArtistMap);
 
+        // 转为Map<String, String>格式
+        Map<String, String> nameUuidMap = artists_partition.stream()
+                .collect(Collectors.toMap(Artist::getName, Artist::getOrigin, (p1, p2) -> p1));
+
         // 5.3.5 数据分组 数据分组是一种更自然的分割数据操作，与将数据分成 ture 和 false 两部分不同，可以使 用任意值对数据分组。
         Map<Artist, List<Album>> goupby_mainsinger = study5.albumsByArtist(albums.stream());
         LOGGER.info("goupby_mainsinger [{}]", goupby_mainsinger);
