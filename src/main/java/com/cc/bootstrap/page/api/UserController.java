@@ -1,13 +1,22 @@
 package com.cc.bootstrap.page.api;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cc.bootstrap.common.base.restful.ResponseResult;
+import com.cc.bootstrap.common.schema.User;
+import com.cc.bootstrap.common.util.ObjectFactory;
+import com.cc.bootstrap.page.dao.UserMapper;
+import com.cc.bootstrap.page.enums.UserEnum;
+import com.cc.bootstrap.page.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cc.bootstrap.common.base.restful.ResponseResult;
-import com.cc.bootstrap.common.schema.User;
-import com.cc.bootstrap.common.util.ObjectFactory;
-import com.cc.bootstrap.page.enums.UserEnum;
-import com.cc.bootstrap.page.dao.UserMapper;
-import com.cc.bootstrap.page.service.UserService;
+import java.util.List;
 /**
  * 测试代码
  * @author CC
@@ -223,5 +224,19 @@ public class UserController {
 		}
 		LOGGER.info("用户信息查询成功，用户信息：" + user);
 		return ResponseResult.success(UserEnum.SUCCESS_USER, page);
+	}
+
+	/**
+	 * @Description 当请求格式为get /test或/test/{userId}，都会进入该方法，执行一套逻辑。
+	 * 相当于设置了路由变量{userId}的默认值。
+	 * @param uid
+	 * @author ChenChen
+	 * @return void
+	 * @date 2022/11/22 14:06
+	 */
+	@GetMapping(path = {"/{userId}", "/"})
+	public void testPathBoth(@PathVariable(value = "userId", required = false) String uid) {
+		// do something.
+		LOGGER.info("uid：{}" + uid);
 	}
 }

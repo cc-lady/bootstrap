@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -245,5 +246,11 @@ public class Study5 {
     // 将转成Map，数据只有一个
     public Map<String, Album> convertToMap(Stream<Album> albums) {
         return albums.collect(toMap(Album::getName, album -> album));
+    }
+
+    // 倒序排列
+    public List<Album> reverseList(Stream<Album> albums) {
+        List<Album> collect = albums.sorted(Comparator.comparing(Album::getName).reversed()).collect(Collectors.toList());
+        return  collect;
     }
 }
