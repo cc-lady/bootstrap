@@ -20,6 +20,6 @@ public class MatchUtil {
         Matcher m = r.matcher(str);
         System.out.println(m.matches());//true
         //第二种
-        System.out.println(str.matches(pattern));//false
+        System.out.println(str.matches(pattern));//true
     }
 }
