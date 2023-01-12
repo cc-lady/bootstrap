@@ -56,6 +56,12 @@
 			<groupId>io.github.openfeign</groupId>
 			<artifactId>feign-httpclient</artifactId>
 		</dependency>
+		<!-- 配置文件加密 ENC(CBkS9ftxXVcLlg41W5+e+yHLPl8cSyzL) 类似配置会自动解密-->
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 	    <!-- 单元测试 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
