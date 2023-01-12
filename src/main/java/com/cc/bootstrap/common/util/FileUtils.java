@@ -4,6 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFileAttributeView;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Description: 文件工具类
@@ -28,5 +35,24 @@ public class FileUtils {
             LOGGER.info("新建目录：" + dir);
             return dir.mkdirs();
         }
+    }
+
+    //设置目录或文件为不可执行
+    public static void setOnlyReadWriteNotExecute(Path path) throws IOException {
+        PosixFileAttributeView posixFileAttributeView = Files.getFileAttributeView(path, PosixFileAttributeView.class);
+        if(null == posixFileAttributeView) {
+            LOGGER.warn("PosixFileAttributeView is not supported.");
+            return;
+        }
+
+        Set<PosixFilePermission> permissionSet = new HashSet<>();
+        permissionSet.add(PosixFilePermission.OWNER_READ);
+        permissionSet.add(PosixFilePermission.OWNER_WRITE);
+        permissionSet.add(PosixFilePermission.GROUP_READ);
+        permissionSet.add(PosixFilePermission.GROUP_WRITE);
+        permissionSet.add(PosixFilePermission.OTHERS_READ);
+        permissionSet.add(PosixFilePermission.OTHERS_WRITE);
+
+        posixFileAttributeView.setPermissions(permissionSet);
     }
 }

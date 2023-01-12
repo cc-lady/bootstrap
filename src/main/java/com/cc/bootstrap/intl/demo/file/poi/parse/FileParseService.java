@@ -1,6 +1,7 @@
 package com.cc.bootstrap.intl.demo.file.poi.parse;
 
 import com.cc.bootstrap.common.schema.User;
+import com.cc.bootstrap.common.util.FileUtils;
 import com.cc.bootstrap.common.util.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -47,6 +48,13 @@ public class FileParseService {
         String dirPath = fileUploadPath + File.separator + userId;
         if (!Paths.get(dirPath).toFile().isDirectory()) {
             throw new UnsupportedOperationException("获取解析文件目录失败，请先上传文件！目录 【" + dirPath + "】");
+        }
+
+        // 设置目录为不可执行
+        try{
+            FileUtils.setOnlyReadWriteNotExecute(Paths.get(dirPath));
+        } catch (Exception e) {
+            LOGGER.error("上传文件目录[{}]权限设置失败！", dirPath, e);
         }
 
         // 文件获取失败，不解析
