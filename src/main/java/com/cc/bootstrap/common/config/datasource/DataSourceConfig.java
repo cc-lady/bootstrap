@@ -9,17 +9,15 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.lookup.BeanFactoryDataSourceLookup;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -30,12 +28,12 @@ import java.util.Map;
  * @author: ChenChen
  * @date: 2022/4/19 16:09
  */
-@MapperScan(basePackages = {"com.cc.bootstrap.page.dao","com.cc.bootstrap.intl.dao"},
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@MapperScan(basePackages = {"com.cc.bootstrap.**.dao"},
         sqlSessionFactoryRef = "sqlSessionFactory-oc")
 @Configuration
-public class DataSourceConfig implements ApplicationContextAware {
-
-    private ApplicationContext context;
+public class DataSourceConfig {
+    public static final Map<Object, Object> DATASOURCEMAP = new HashMap<>();
 
     /**
      * 数据源1
@@ -43,7 +41,7 @@ public class DataSourceConfig implements ApplicationContextAware {
      * @return
      */
     @Profile({"dev", "prod"})
-    @Bean("master")
+    @Bean(DataSourceContextHolder.MASTER_DS)
     @ConfigurationProperties("spring.datasource.druid.master")
     public DataSource master() {
         return DruidDataSourceBuilder.create().build();
@@ -55,7 +53,7 @@ public class DataSourceConfig implements ApplicationContextAware {
      * @return
      */
     @Profile({"dev", "prod"})
-    @Bean("slave")
+    @Bean(DataSourceContextHolder.SLAVE_DS)
     @ConfigurationProperties("spring.datasource.druid.slave")
     public DataSource slave() {
         return DruidDataSourceBuilder.create().build();
@@ -67,10 +65,8 @@ public class DataSourceConfig implements ApplicationContextAware {
      */
     @Primary
     @Bean(name = "dynamic")
-    public DataSource dataSource(@Qualifier("master") DataSource dataSourceMaster,
-                                 @Qualifier("slave") DataSource dataSourceSlave) {
-        ApplicationContext c = getContext();
-
+    public DataSource dataSource(@Qualifier(DataSourceContextHolder.MASTER_DS) DataSource dataSourceMaster,
+                                 @Qualifier(DataSourceContextHolder.SLAVE_DS) DataSource dataSourceSlave) {
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
         // 默认数据源
         dynamicDataSource.setDefaultTargetDataSource(dataSourceMaster);
@@ -80,12 +76,7 @@ public class DataSourceConfig implements ApplicationContextAware {
         dsMap.put("slave",dataSourceSlave);
 
         dynamicDataSource.setTargetDataSources(dsMap);
-        dynamicDataSource.setDataSourceLookup(new BeanFactoryDataSourceLookup(c.getAutowireCapableBeanFactory()));
         return dynamicDataSource;
-    }
-
-    public ApplicationContext getContext() {
-        return context;
     }
 
     /**
@@ -111,16 +102,12 @@ public class DataSourceConfig implements ApplicationContextAware {
         // 使用MP提供的SSF，配套MP的分页插件，分页支持ORACLE，不支持Sybase
         final MybatisSqlSessionFactoryBean ssfb = new MybatisSqlSessionFactoryBean();
         ssfb.setDataSource(dataSource);
-        ssfb.setPlugins(new Interceptor[]{new PaginationInterceptor()});
+//        ssfb.setPlugins(new Interceptor[]{new PaginationInterceptor()});
+        ssfb.setPlugins(new Interceptor[]{new GbaseDbTypeIntercepter()});
         ssfb.setGlobalConfig(gcfg);
         ssfb.setConfiguration(mcfg);
 
         return ssfb.getObject();
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
     }
 }
 

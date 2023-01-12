@@ -1,6 +1,7 @@
 package com.cc.bootstrap.common.config.datasource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.util.StringUtils;
 
 /**
  * @Description: 动态数据源
@@ -10,7 +11,11 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 public class DynamicDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
-        return DataSourceContextHolder.getDB();
+        String ds = DataSourceContextHolder.getDataSource();
+        if(StringUtils.isEmpty(ds)) {
+            ds = DataSourceContextHolder.MASTER_DS;
+        }
+        return ds;
     }
 }
 

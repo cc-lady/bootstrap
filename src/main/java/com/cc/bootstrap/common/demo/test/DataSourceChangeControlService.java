@@ -30,12 +30,20 @@ public class DataSourceChangeControlService {
      * @date 2022/4/19 17:14
      */
     public void testChange(List<User> userList) {
-        LOGGER.info("当前数据源1：[{}]", DataSourceContextHolder.getDB());
+        LOGGER.info("当前数据源1：[{}]", DataSourceContextHolder.getDataSource());
         LOGGER.info("切换数据源：");
-        DataSourceContextHolder.setDB("slave");//切换数据源
-        LOGGER.info("当前数据源2：[{}]", DataSourceContextHolder.getDB());
-        for(int i = 0; i < userList.size(); i++) {
-            userService.insert(i, userList.get(i));
+        // 注意切换所在的方法及父方法等都不能使用事务注解，否则会切换不成功。
+        DataSourceContextHolder.setDataSource(DataSourceContextHolder.SLAVE_DS);//切换数据源
+        LOGGER.info("当前数据源2：[{}]", DataSourceContextHolder.getDataSource());
+        try {
+            for (int i = 0; i < userList.size(); i++) {
+                userService.insert(i, userList.get(i));
+            }
+        } catch (Exception e) {
+            LOGGER.info("操作失败");
+        } finally {
+            // 无论成功失败与否，都要记得清除数据源，否则会影响其他接口。
+            DataSourceContextHolder.clearDataSource();
         }
     }
 }
