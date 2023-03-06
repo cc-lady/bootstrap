@@ -3,6 +3,7 @@ package com.cc.bootstrap.common.demo.time.date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 
@@ -29,6 +30,13 @@ public class LocalDateDemo {
         LocalDate nextWed1 = date1.with(adj);
         System.out.printf("For the date of %s, the next Wednesday is %s.%n",
                 date1, nextWed1);//For the date of 2000-11-20, the next Wednesday is 2000-11-22.
+
+        //上个月最后一天
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate accountLocalDate = LocalDate.parse("20230228", dateTimeFormatter);
+        LocalDate lastDayOfMonth_lastMonth = accountLocalDate.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+        String lastDayOfMonth_lastMonth_str = lastDayOfMonth_lastMonth.format(dateTimeFormatter);
+        System.out.println(lastDayOfMonth_lastMonth_str);
 
         //Period 和 Duration部分也有使用LocalDate类 的 示例。
     }
