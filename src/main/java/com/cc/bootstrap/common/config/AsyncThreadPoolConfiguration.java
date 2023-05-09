@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -16,6 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 @Configuration
 public class AsyncThreadPoolConfiguration {
+
 
     /**
      * @Description 异步线程池说明
@@ -29,7 +29,7 @@ public class AsyncThreadPoolConfiguration {
      * @date 2022/3/29 8:52
      */
     @Bean("asyncThreadPool")
-    public Executor asyncThreadPool() {
+    public ThreadPoolTaskExecutor asyncThreadPool() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         // 拒绝策略：放弃当前任务，且抛出异常（可根据需要配置不同的拒绝策略）
         threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
