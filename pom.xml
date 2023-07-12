@@ -229,7 +229,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provider</scope>
 		</dependency>
 <!--		<dependency>-->
 <!--			<groupId>log4j</groupId>-->
@@ -303,6 +302,13 @@
 <!--			<version>4.4.0</version>-->
 <!--			<type>pom</type>-->
 <!--		</dependency>-->
+
+		<!--探测文件编码格式-->
+		<dependency>
+			<groupId>com.googlecode.juniversalchardet</groupId>
+			<artifactId>juniversalchardet</artifactId>
+			<version>1.0.3</version>
+		</dependency>
 	</dependencies>
 
     <!-- spring cloud依赖 -->
@@ -349,5 +355,27 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</testResource>
+		</testResources>
 	</build>
 </project>
