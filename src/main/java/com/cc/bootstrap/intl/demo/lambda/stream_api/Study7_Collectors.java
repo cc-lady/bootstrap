@@ -121,7 +121,7 @@ public class Study7_Collectors {
                                     if (dish.getCalories() <= 400) return Dish.CaloricLevel.DIET;
                                     else if (dish.getCalories() <= 700) return Dish.CaloricLevel.NORMAL;
                                     else return Dish.CaloricLevel.FAT;
-                                } )
+                                })
                         )
                 );
         System.out.println(dishesByTypeCaloricLevel);
@@ -147,11 +147,11 @@ public class Study7_Collectors {
 
         //(1)把收集器的结果转换为另一种类型 ---------Collectors.collectingAndThen工厂方法
         Map<Dish.Type, Dish> mostCaloricByType1 =
-        Dish.menu.stream()
-                .collect(groupingBy(Dish::getType,
-                        collectingAndThen(
-                                maxBy(comparingInt(Dish::getCalories)),
-                                Optional::get)));
+                Dish.menu.stream()
+                        .collect(groupingBy(Dish::getType,
+                                collectingAndThen(
+                                        maxBy(comparingInt(Dish::getCalories)),
+                                        Optional::get)));
         System.out.println(mostCaloricByType1);
 //        这个工厂方法接受两个参数——要转换的收集器以及转换函数，并返回另一个收集器。这个
 //        收集器相当于旧收集器的一个包装，collect操作的最后一步就是将返回值用转换函数做一个映
@@ -177,19 +177,23 @@ public class Study7_Collectors {
         Map<Dish.Type, Set<Dish.CaloricLevel>> caloricLevelsByType =
                 Dish.menu.stream().collect(
                         groupingBy(Dish::getType, mapping(
-                                dish -> { if (dish.getCalories() <= 400) return Dish.CaloricLevel.DIET;
-                                else if (dish.getCalories() <= 700) return Dish.CaloricLevel.NORMAL;
-                                else return Dish.CaloricLevel.FAT; },
-                                toSet() )));
+                                dish -> {
+                                    if (dish.getCalories() <= 400) return Dish.CaloricLevel.DIET;
+                                    else if (dish.getCalories() <= 700) return Dish.CaloricLevel.NORMAL;
+                                    else return Dish.CaloricLevel.FAT;
+                                },
+                                toSet())));
         System.out.println(caloricLevelsByType);//{OTHER=[DIET, NORMAL], FISH=[DIET, NORMAL], MEAT=[DIET, FAT, NORMAL]}
 
         Map<Dish.Type, Set<Dish.CaloricLevel>> caloricLevelsByType1 =
                 Dish.menu.stream().collect(
                         groupingBy(Dish::getType, mapping(
-                                dish -> { if (dish.getCalories() <= 400) return Dish.CaloricLevel.DIET;
-                                else if (dish.getCalories() <= 700) return Dish.CaloricLevel.NORMAL;
-                                else return Dish.CaloricLevel.FAT; },
-                                toCollection(HashSet::new) )));
+                                dish -> {
+                                    if (dish.getCalories() <= 400) return Dish.CaloricLevel.DIET;
+                                    else if (dish.getCalories() <= 700) return Dish.CaloricLevel.NORMAL;
+                                    else return Dish.CaloricLevel.FAT;
+                                },
+                                toCollection(HashSet::new))));
         System.out.println(caloricLevelsByType1);//{OTHER=[DIET, NORMAL], FISH=[DIET, NORMAL], MEAT=[DIET, FAT, NORMAL]}
 
         //3.分区------------------Collectors.partitioningBy工厂方法
