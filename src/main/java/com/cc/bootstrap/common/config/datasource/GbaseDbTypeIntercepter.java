@@ -10,7 +10,7 @@ import org.apache.ibatis.plugin.Signature;
 import java.sql.Connection;
 
 /**
- * @Description: gbase使用mysql方言，mybatis-plus不支持gbase方言
+ * @Description: gbase使用mysql方言，mybatis-plus不支持gbase方言，更改后分页很好用，已经过其他人测试使用
  * @author: ChenChen
  * @date: 2023/1/12 15:30
  */

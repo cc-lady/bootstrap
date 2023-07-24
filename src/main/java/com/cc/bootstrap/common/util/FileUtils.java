@@ -108,7 +108,11 @@ public class FileUtils {
             LOGGER.info("path {} detectorCharset {}", path, detectorCharset);
             if(StringUtils.isEmpty(detectorCharset)) {
                 return encoding;
+            // 探测csv文件仅UTF-8准确，所以其他全部返回默认GB18030
+            } else if(!"UTF-8".equalsIgnoreCase(detectorCharset)) {
+                return encoding;
             }
+            return detectorCharset;
         } catch (Exception e) {
             LOGGER.warn("探测文件编码格式失败，path {}", path, e);
         }

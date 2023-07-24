@@ -3,7 +3,6 @@ package com.cc.bootstrap.common.config.datasource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -102,6 +101,7 @@ public class DataSourceConfig {
         // 使用MP提供的SSF，配套MP的分页插件，分页支持ORACLE，不支持Sybase
         final MybatisSqlSessionFactoryBean ssfb = new MybatisSqlSessionFactoryBean();
         ssfb.setDataSource(dataSource);
+        // 支持gbase分页
 //        ssfb.setPlugins(new Interceptor[]{new PaginationInterceptor()});
         ssfb.setPlugins(new Interceptor[]{new GbaseDbTypeIntercepter()});
         ssfb.setGlobalConfig(gcfg);
