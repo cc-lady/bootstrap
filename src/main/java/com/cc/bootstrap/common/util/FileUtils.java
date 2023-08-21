@@ -1,10 +1,15 @@
 package com.cc.bootstrap.common.util;
 
+import com.cc.bootstrap.common.exception.FileException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.bouncycastle.operator.RuntimeOperatorException;
 import org.mozilla.universalchardet.UniversalDetector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -17,15 +22,31 @@ import java.nio.file.Path;
 import java.nio.file.attribute.PosixFileAttributeView;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @Description: 文件工具类
  * @author: ChenChen
  * @date: 2022/3/2 17:18
  */
+@Slf4j
+@Component
+@ConfigurationProperties(prefix = "file.config")
 public class FileUtils {
     private static Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);
+
+    private String allowType;
+    private Map<String,String> allowContentType;
+
+    public void setAllowType(String allowType) {
+        this.allowType = allowType;
+    }
+
+    public void setAllowContentType(Map<String, String> allowContentType) {
+        this.allowContentType = allowContentType;
+    }
 
     /**
      * @Description 创建文件夹
@@ -117,5 +138,71 @@ public class FileUtils {
             LOGGER.warn("探测文件编码格式失败，path {}", path, e);
         }
         return encoding;
+    }
+
+    /**
+     * @Description 校验文件类型和文件头类型
+     * @param files
+     * @author ChenChen
+     * @return void
+     * @date 2023/8/21 10:02
+     */
+    public boolean validateFileTypes(MultipartFile[] files) {
+        if(files == null) {
+            return true;
+        }
+
+        for (MultipartFile file : files) {
+            if(file == null) {
+                continue;
+            }
+
+            String fileName = file.getOriginalFilename();
+            if(StringUtils.isEmpty(fileName)) {
+                continue;
+            }
+            String fileType = fileName.substring(fileName.lastIndexOf(".")+1);
+            validateFileType(fileType);
+
+            //增加校验文件头
+            String contentType = file.getContentType();
+            validateFileContentType(fileName, contentType);
+        }
+        return true;
+    }
+
+    //校验文件头类型
+    private boolean validateFileContentType(String fileName, String contentType) {
+        log.info("校验文件头 fileName {} contentType {}", fileName, contentType);
+        if(null == allowContentType || allowContentType.size() == 0 || StringUtils.isEmpty(contentType)) {
+            return true;
+        }
+
+        boolean exits = allowContentType.values().stream()
+                .filter(fileContentType -> fileContentType.contains(contentType))
+                .findAny()
+                .isPresent();
+        if(!exits) {
+            throw new FileException("不允许的文件头类型！当前校验文件名为：" + fileName + "，当前文件头为："+contentType
+                    +"，允许的文件头类型如下："
+                    + allowContentType.keySet().stream().map(key -> key + "=" + allowContentType.get(key))
+                        .collect(Collectors.joining("、")));
+        }
+        return true;
+    }
+
+    //校验文件类型
+    private boolean validateFileType(String fileType) {
+        if(StringUtils.isEmpty(fileType)) {
+            return true;
+        }
+
+        String[] fileTypeArr = allowType.split(",");
+        for (int i = 0;i<fileTypeArr.length;i++) {
+            if(fileType.equalsIgnoreCase(fileTypeArr[i])) {
+                return true;
+            }
+        }
+        throw new FileException("不允许的文件类型！允许的文件类型如下：" + allowType + "，请检查！");
     }
 }
