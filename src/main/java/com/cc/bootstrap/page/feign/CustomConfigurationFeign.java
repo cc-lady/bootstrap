@@ -1,5 +1,6 @@
 package com.cc.bootstrap.page.feign;
 
+import com.cc.bootstrap.common.config.FeignConfiguration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @Description 测试查看自定义configmap配置
  * @createTime 2021年08月16日 09:15:00
  */
-@FeignClient(name = "CUSTOMCONFIGURATION", url = "${feign.client.customconfiguration}")
+@FeignClient(name = "CUSTOMCONFIGURATION", url = "${feign.client.customconfiguration}", configuration = FeignConfiguration.class)
 public interface CustomConfigurationFeign {
     
     /**
