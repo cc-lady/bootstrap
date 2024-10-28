@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toSet;
  * @author: ChenChen
  * @date: 2023/1/29 14:14
  */
-public class Study7_Collectors {
+public class    Study7_Collectors {
     //预定义收集器
 //    预定义收集器的功能，也就是那些可以从Collectors
 //    类提供的工厂方法（例如groupingBy）创建的收集器。它们主要提供了三大功能：

@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class Demo5_RegexTest {
 
+
     @Test
     public void testRegex() {
         String testStr = "I paid $30 for 100 apples,\n" +

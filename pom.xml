@@ -66,9 +66,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<scope>compile</scope>
 		</dependency>
-    
+		<dependency>
+			<groupId>com.github.stefanbirkner</groupId>
+			<artifactId>system-rules</artifactId>
+			<version>1.19.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+
 		<!-- web项目依赖：springmvc tomcat 用了这个包，就会有一个约定俗成的配置jsp为webapp/web-inf底下的 -->
 		<!-- 集成springcoud之后，重复注释掉
 		<dependency>
@@ -171,11 +178,6 @@
 		</dependency>
 
 		<!-- mybatis -->
-		<!-- <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
-        </dependency> -->
 		<!--<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -195,22 +197,22 @@
 		<dependency>
 	        <groupId>com.baomidou</groupId>
 	        <artifactId>mybatis-plus-boot-starter</artifactId>
-	        <version>3.1.2</version>
+	        <version>3.5.6</version>
 	    </dependency>
 	    <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.1.2</version>
+            <version>3.5.6</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.1.2</version>
+            <version>3.5.6</version>
         </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.12</version>
 		</dependency>
 
 		<!-- java mail -->
@@ -338,6 +340,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.4</version>
+		</dependency>
+		<dependency>
+			<groupId>net.contentobjects.jnotify</groupId>
+			<artifactId>jnotify</artifactId>
+			<version>0.94</version>
 		</dependency>
 	</dependencies>
 

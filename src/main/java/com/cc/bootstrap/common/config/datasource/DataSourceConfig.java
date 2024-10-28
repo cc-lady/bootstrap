@@ -4,7 +4,6 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.annotation.MapperScan;
@@ -103,11 +102,13 @@ public class DataSourceConfig {
         ssfb.setDataSource(dataSource);
         // 支持gbase分页
 //        ssfb.setPlugins(new Interceptor[]{new PaginationInterceptor()});
-        ssfb.setPlugins(new Interceptor[]{new GbaseDbTypeIntercepter()});
+//        ssfb.setPlugins(new Interceptor[]{new GbaseDbTypeIntercepter()});
         ssfb.setGlobalConfig(gcfg);
         ssfb.setConfiguration(mcfg);
 
         return ssfb.getObject();
     }
+
+
 }
 
