@@ -229,4 +229,21 @@ public class    Study7_Collectors {
                                         Optional::get)));
         System.out.println(mostCaloricPartitionedByVegetarian);//{false=pork, true=pizza}
     }
+
+//    java lambda表达式将list转 map<String,List<String>>
+//
+//    Map<String,List<String>> materielSeqMap = opList.stream()
+//            .collect(Collectors.groupingBy(DeviceDto::getDeviceCode,Collectors.mapping(DeviceDto::getDeviceName,Collectors.toList())));
+
+//    转换为map，然后值根据排序获取最大的一个
+//
+//            tableMap = list.stream().filter(t->t.getTargetSchemaName().equals(e.getKey()))
+//            .collect(Collectors.groupingBy(DgComponentSjjrJtsjDatatable::getTargetTableName,
+//                    Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(DgComponentSjjrJtsjDatatable::getVersion)),
+//                            o -> o.get().getDataTableId()) ) );
+
+//    groupby 之后再对集合进行去重操作
+//
+//materielList.stream().collect(Collectors.groupingBy(BomDto::getRootId,
+//                              Collectors.collectingAndThen(Collectors.toCollection( () -> new TreeSet<>(Comparator.comparing(BomDto::getMeasureParentCode))), ArrayList::new) ))
 }
