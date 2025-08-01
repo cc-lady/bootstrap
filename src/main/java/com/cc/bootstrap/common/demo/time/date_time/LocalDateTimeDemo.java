@@ -4,6 +4,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 
 /**
  * @Description: LocalDateTime
@@ -32,5 +35,18 @@ public class LocalDateTimeDemo {
 
         System.out.printf("6 months ago: %s%n",
                 LocalDateTime.now().minusMonths(6));//6 months ago: 2022-02-04T17:40:38.005
+    }
+
+    // 灵活匹配日期时间格式
+    public LocalDateTime convertMultiToLocalDateTime(String operateDateAndTime) {
+        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
+                .appendPattern("[yyyy/M/d][yyyy/MM/dd][yyyy/M/dd][yyyy/MM/d][yyyy-MM-dd]")
+                .optionalStart()
+                .appendPattern(" [H:mm][HH:m][HH:mm][HH:mm]")
+                .optionalEnd()
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .toFormatter();
+        return LocalDateTime.parse(operateDateAndTime, dateTimeFormatter);
     }
 }
