@@ -84,7 +84,7 @@ public class FileUploadService {
                 Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {
                 LOGGER.error("文件【{}】上传失败！", fileName, e);
-                throw new FileException("上传文件【"+fileName+"】发生异常，请检查！");
+                throw new FileException(500, "A006", "上传文件【"+fileName+"】发生异常，请检查！");
             }
         }
 

@@ -183,7 +183,7 @@ public class FileUtils {
                 .findAny()
                 .isPresent();
         if(!exits) {
-            throw new FileException("不允许的文件头类型！当前校验文件名为：" + fileName + "，当前文件头为："+contentType
+            throw new FileException(500, "A001", "不允许的文件头类型！当前校验文件名为：" + fileName + "，当前文件头为："+contentType
                     +"，允许的文件头类型如下："
                     + allowContentType.keySet().stream().map(key -> key + "=" + allowContentType.get(key))
                         .collect(Collectors.joining("、")));
@@ -203,6 +203,6 @@ public class FileUtils {
                 return true;
             }
         }
-        throw new FileException("不允许的文件类型！允许的文件类型如下：" + allowType + "，请检查！");
+        throw new FileException(500, "A002", "不允许的文件类型！允许的文件类型如下：" + allowType + "，请检查！");
     }
 }

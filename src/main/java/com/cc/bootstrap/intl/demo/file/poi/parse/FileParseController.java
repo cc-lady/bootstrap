@@ -35,7 +35,7 @@ public class FileParseController {
             userList = fileParseService.parse(userId);
         } catch (IOException e) {
             LOGGER.error("文件解析失败！" , e);
-            throw new FileException("poi解析文件失败！", e);
+            throw new FileException(500, "A005", "poi解析文件失败！");
         }
         LOGGER.info("poi解析文件成功！");
         return ResponseResult.success(userList);

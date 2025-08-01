@@ -27,7 +27,7 @@ public enum UserEnum implements IBaseEnum{//使用 enum 定义的枚举类默认
 	private String code;
 	private String message;
 
-	private UserEnum(String code, String message) {
+	UserEnum(String code, String message) {
 		this.code = code;
 		this.message = message;
 	}

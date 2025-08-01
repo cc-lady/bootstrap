@@ -36,7 +36,7 @@ public class FileLoadController {
             fileLoadService.load(userId, response);
         } catch (IOException e) {
             LOGGER.error("poi导出用户数据失败！" , e);
-            throw new FileException("poi导出用户数据失败！", e);
+            throw new FileException(500, "A004", "poi导出用户数据失败！");
         }
 
         LOGGER.info("poi导出用户数据成功！");

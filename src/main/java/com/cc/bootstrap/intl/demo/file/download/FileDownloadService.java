@@ -84,7 +84,7 @@ public class FileDownloadService {
             fileInfoLogic.downloadZipFile(fileVoList, user.getUserName() + "文件下载", response);
         } catch (Exception e) {
             LOGGER.error("用户【{}】文件下载失败！", user.getUserName(), e);
-            throw new FileException("文件下载失败！");
+            throw new FileException(500, "A003", "文件下载失败！");
         }
     }
 }

@@ -63,6 +63,11 @@ public class ResponseResult<T> {
 		return new ResponseResult<T>(false, code.getCode(), message, null);
 	}
 
+	//失败，不带返回数据
+	public static<T> ResponseResult<T> failWithMessage(String code, String message){
+		return new ResponseResult<T>(false, code, message, null);
+	}
+
 	public Boolean getSuccess() {
 		return success;
 	}

@@ -6,7 +6,17 @@ package com.cc.bootstrap.common.exception;
  * @date: 2022/3/2 17:39
  */
 public class FileException extends RuntimeException{
-    public FileException(String msg) {super(msg);}
-    public FileException(Exception exception) {super(exception);}
-    public FileException(String msg, Exception exception) {super(msg, exception);}
+    private final Integer code;
+    private final String serverExceptinCode;
+
+    public FileException(Integer code, String serverExceptinCode, String message) {
+        super(message);
+        this.code = code;
+        this.serverExceptinCode = serverExceptinCode;
+    }
+
+    public FileException(Integer code, String serverExceptinCode) {
+        this.code = code;
+        this.serverExceptinCode = serverExceptinCode;
+    }
 }
