@@ -4,7 +4,10 @@ import com.cc.bootstrap.common.base.restful.ResponseResult;
 import com.cc.bootstrap.common.enums.GlobalExceptionEnum;
 import com.cc.bootstrap.common.exception.FileException;
 import com.cc.bootstrap.common.exception.api.base.AbstractApiException;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DuplicateKeyException;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
@@ -131,11 +135,23 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseResult<String> bindExceptionHandler(HttpMessageNotReadableException exception, HttpServletResponse response) {
-        String errorMessage = exception.getMessage();
-        log.error("请求内容解析异常，HttpMessageNotReadableException = {} ", errorMessage, exception);
+    public ResponseResult<String> bindExceptionHandler(HttpMessageNotReadableException exception, HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(500);
-        return this.error(GlobalExceptionEnum.MESSAGE_NOT_READABLE, "访问服务异常，请求内容解析失败");
+
+        Throwable cause = exception.getCause();
+        String errorMessage = null;
+        if (cause instanceof JsonParseException) {
+            JsonParseException jsonParseException = (JsonParseException) cause;
+            errorMessage = jsonParseException.getMessage();
+        } else if (cause instanceof InvalidFormatException) {
+            InvalidFormatException invalidFormatException = (InvalidFormatException) cause;
+            String path = invalidFormatException.getPath().stream().map(JsonMappingException.Reference::getFieldName).collect(Collectors.joining("->"));
+            errorMessage = String.format("请检查参数：[%]，参数值：[%s]", path, invalidFormatException.getValue());
+        } else {
+            errorMessage = exception.getMessage();
+        }
+        log.error("请求内容解析异常，HttpMessageNotReadableException = {} ", errorMessage, exception);
+        return this.error(GlobalExceptionEnum.MESSAGE_NOT_READABLE, String.format("访问服务异常，请求内容解析失败！%s。", errorMessage));
     }
 
     @ExceptionHandler(SQLSyntaxErrorException.class)
