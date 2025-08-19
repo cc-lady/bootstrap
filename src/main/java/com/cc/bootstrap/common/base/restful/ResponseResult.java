@@ -57,6 +57,11 @@ public class ResponseResult<T> {
 	public static<T> ResponseResult<T> fail(IBaseEnum code, T data){
 		return new ResponseResult<T>(false, code.getCode(), code.getMessage(), data);
 	}
+
+	//失败，带返回数据
+	public static<T> ResponseResult<T> fail(String code, String message, T data){
+		return new ResponseResult<T>(false, code, message, data);
+	}
 	
 	//自定义message，并返回失败
 	public static<T> ResponseResult<T> fail(IBaseEnum code, String message){

@@ -28,7 +28,7 @@ import java.util.Map;
  */
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @MapperScan(basePackages = {"com.cc.bootstrap.**.dao"},
-        sqlSessionFactoryRef = "sqlSessionFactory-oc")
+        sqlSessionFactoryRef = "sqlSessionFactory")
 @Configuration
 public class DataSourceConfig {
     public static final Map<Object, Object> DATASOURCEMAP = new HashMap<>();
@@ -90,7 +90,7 @@ public class DataSourceConfig {
 
 
     @Primary
-    @Bean(name = {"sqlSessionFactory-oc", "th-default-ssf"})
+    @Bean(name = {"sqlSessionFactory", "th-default-ssf"})
     public SqlSessionFactory sqlSessionFactory(@Qualifier("dynamic") DataSource dataSource) throws Exception {
         // MP全局配置
         GlobalConfig gcfg = new GlobalConfig();
